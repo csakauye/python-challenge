@@ -31,6 +31,9 @@ with open(budget_path) as budget_file:
     total_difference = []
     # Stores the differences between the values for each day, starting at index 2 to account for all the changes between days
     total_difference2 = []
+    # Stores the corresponding months to the total difference list above 
+    months_odd = [] 
+
     # Creating a for loop to cycle through each row of data 
     for rows in budget_reader:
         
@@ -58,8 +61,6 @@ with open(budget_path) as budget_file:
     # Calculating the net total amount of "Profit/Losses" over the entire period 
     total = sum(total_amount)
 
-    # Calculating the changes in "Profit/Losses" over the entire period, and then the average of those changes 
-
     # Combining the even and odd lists to get the changes between days, starting with day 0 and day 1
     for(a, b) in zip(even, odd):
         total_difference.append(b - a)
@@ -81,9 +82,27 @@ with open(budget_path) as budget_file:
 
     # Calculating the greatest increase in profits (date and amount) over the entire period
     grt_increase = max(net_differences)
+    
+    # Finding the location of the greatest increase in the list 
+    index_increase = net_differences.index(grt_increase)
+    
+    # Printed the index so it could be used to find the corresponding date
+    # print(index_increase)
+    # The above code gave the index 39
 
+    # Creating a list like the one used to setup the net differences calculation but to pull the corresponding dates. Couldn't determine a way to pull the date and value at the same time 
+    # Using just months_odd instead of a months_even or months_even2 because we're always subtracting row below from row above, therefore just need every second row of data, starting from row 2 or index 1 
+    months_odd = total_months[1::2]
+    
     # Calculating the greatest decrease in profits (date and amount) over the entire period
     grt_decrease = min(net_differences)
+
+    # Finding the location of the greatest decrease in the list 
+    index_decrease = net_differences.index(grt_decrease)
+
+    # Printed the index so it could be used to find the corresponding date 
+    # print(index_decrease)
+    # The above code gave the index 24 
 
     # Printing out the information so it can appear in the terminal 
     print("Financial Analysis")
@@ -96,9 +115,11 @@ with open(budget_path) as budget_file:
 
     print(f"Average Change: ${avg_change_rd}")
 
-    print(f"Greatest Increase in Profit: (${grt_increase})")
+    # Referring to lines 93 - 102, pulling in the months_odd list at index 39 to get the corresponding date for the greatest increase 
+    print(f"Greatest Increase in Profit: {months_odd[39]} (${grt_increase})")
     
-    print(f"Greatest Decrease in Profit: (${grt_decrease})")
+    # Referring to lines 107 - 112, pulling in the months_odd list at index 24 to get the corresponding date for the greatest decrease
+    print(f"Greatest Decrease in Profit: {months_odd[24]} (${grt_decrease})")
     
 
 # Setting up the path to access the text file to write to
@@ -111,7 +132,7 @@ with open(txt_path, 'w') as txt_file:
   txt_file.writelines(f'Total Months: {len(total_months)}\n')
   txt_file.writelines(f'Total: ${total}\n')
   txt_file.writelines(f"Average Change: ${avg_change_rd}\n")
-  txt_file.writelines(f'Greatest Increase in Profit: (${grt_increase})\n')
-  txt_file.writelines(f'Greatest Decrease in Profit: (${grt_decrease})\n')
+  txt_file.writelines(f'Greatest Increase in Profit: {months_odd[39]} (${grt_increase})\n')
+  txt_file.writelines(f'Greatest Decrease in Profit: {months_odd[24]} (${grt_decrease})\n')
     
     
