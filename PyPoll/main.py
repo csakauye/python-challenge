@@ -94,13 +94,13 @@ with open(vote_path) as vote_file:
         for assigned in votes_assigned:
             # Setting up the portion/percentage of the votes that belongs to each candidate 
             for portion in per_all:
-                # Concatinating the information 
+                # Concatenating the information 
                 all_info = politician + ":" + " " + str(portion) + " " + "(" + str(assigned) + ")"
                 # Creating a list by appending each concatenated iteration. This gives a list with a lot of repeats     
                 all_info_list.append(all_info)
     # Since the all_info_list has a lot of repeats, I tried to find a way to pull out only the information needed. The way I was able to get my code to work was using the del function to delete out the pieces of information I didn't want by their index
     del all_info_list[1:13]
-    # The del function was more of a manual way of deleting out the unneeded information because it requried me to count the indexes. I could pull the individual numbers by themselves, but in order to get it to read out alongside the candidate name and percentage, this is what I came up with 
+    # The del function was more of a manual way of deleting out the unneeded information because it required me to count the indexes. I could pull the individual numbers by themselves, but in order to get it to read out alongside the candidate name and percentage, this is what I came up with 
     del all_info_list[2:14]
     # Prints out new list 
     for each in all_info_list:
@@ -121,7 +121,7 @@ with open(vote_path) as vote_file:
 # Setting up the path to access the text file to write to
 txt_path = os.path.join("PyPoll", "analysis", "pypoll.txt")
 
-# Printing the calcualted analysis from above in a text file using write, need to use \n to get the data to print on separate lines
+# Printing the calculated analysis from above in a text file using write, need to use \n to get the data to print on separate lines
 with open(txt_path, 'w') as txt_file:
     txt_file.writelines("Election Results\n")
     txt_file.writelines("----------------------------------\n")

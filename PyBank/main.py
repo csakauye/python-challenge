@@ -23,9 +23,9 @@ with open(budget_path) as budget_file:
     budget_header = next(budget_reader)
 
     # Creating empty lists to store data from the csv file 
-    # Stores the column listing out the months 
+    # Stores the data in the column listing out the months 
     total_months = []
-    # Stores the column listing out the different values for each day 
+    # Stores the data in the column listing out the different values for each day 
     total_amount = []
     # Stores the differences between the values for each day, used to calculate average change, greatest increase and greatest decrease
     total_difference = []
@@ -116,23 +116,23 @@ with open(budget_path) as budget_file:
     print(f"Average Change: ${avg_change_rd}")
 
     # Referring to lines 93 - 102, pulling in the months_odd list at index 39 to get the corresponding date for the greatest increase 
-    print(f"Greatest Increase in Profit: {months_odd[39]} (${grt_increase})")
+    print(f"Greatest Increase in Profits: {months_odd[39]} (${grt_increase})")
     
     # Referring to lines 107 - 112, pulling in the months_odd list at index 24 to get the corresponding date for the greatest decrease
-    print(f"Greatest Decrease in Profit: {months_odd[24]} (${grt_decrease})")
+    print(f"Greatest Decrease in Profits: {months_odd[24]} (${grt_decrease})")
     
 
 # Setting up the path to access the text file to write to
 txt_path = os.path.join("PyBank", "analysis", "pybank.txt")
 
-# Printing the calcualted analysis from above in a text file using write, need to use \n to get the data to print on separate lines
+# Printing the calculated analysis from above in a text file using write, need to use \n to get the data to print on separate lines
 with open(txt_path, 'w') as txt_file:
   txt_file.writelines("Financial Analysis\n")
   txt_file.writelines("------------------------------\n")
   txt_file.writelines(f'Total Months: {len(total_months)}\n')
   txt_file.writelines(f'Total: ${total}\n')
   txt_file.writelines(f"Average Change: ${avg_change_rd}\n")
-  txt_file.writelines(f'Greatest Increase in Profit: {months_odd[39]} (${grt_increase})\n')
-  txt_file.writelines(f'Greatest Decrease in Profit: {months_odd[24]} (${grt_decrease})\n')
+  txt_file.writelines(f'Greatest Increase in Profits: {months_odd[39]} (${grt_increase})\n')
+  txt_file.writelines(f'Greatest Decrease in Profits: {months_odd[24]} (${grt_decrease})\n')
     
     
